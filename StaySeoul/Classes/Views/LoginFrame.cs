@@ -8,8 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using StaySeoul.Classes.Applications;
 using StaySeoul.Classes.Models;
+using StaySeoul.Classes.Views;
 using StaySeoul.Resources;
+using static System.Windows.Forms.LinkLabel;
 
 namespace StaySeoul
 {
@@ -18,7 +22,27 @@ namespace StaySeoul
         private User user = new User();
         public StaySeoul()
         {
-            InitializeComponent();
+            string conteudo = new GerenciadorArquivos().LerArquivo("UserLog");
+            if (string.IsNullOrEmpty(conteudo))
+            {
+                InitializeComponent();
+            }
+            else
+            {
+                InitializeComponent();
+                UserLog newUser = JsonConvert.DeserializeObject<UserLog>(conteudo);
+                if (newUser.UserType.Equals("Employee"))
+                {
+                    employeeTxt.Text = newUser.UserName;
+                    pswdTxt.Text = newUser.Password;
+                }
+                else
+                {
+                    userTxt.Text = newUser.UserName;
+                    pswdTxt.Text = newUser.Password;
+                }
+                loginBtn_Click(this, new EventArgs());
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,7 +87,7 @@ namespace StaySeoul
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
-        {   
+        {
             if(string.IsNullOrEmpty(employeeTxt.Text) && string.IsNullOrEmpty(userTxt.Text))
             {
                 MessageBox.Show("Some fields are empty");
@@ -92,8 +116,12 @@ namespace StaySeoul
 
                     if (signedCb.Checked == true)
                     {
-                        SetActualUser();
+                        SetActualUser(1);
                     }
+
+                    ManagementFrame man = new ManagementFrame(this);
+                    man.DisableTabs(1);
+                    man.Show();
                 }
                 else
                 {
@@ -124,8 +152,12 @@ namespace StaySeoul
 
                     if (signedCb.Checked == true)
                     {
-                        SetActualUser();  
+                        SetActualUser(0);  
                     }
+
+                    ManagementFrame man = new ManagementFrame(this);
+                    man.DisableTabs(0);
+                    man.Show();
                 }
                 else
                 {
@@ -134,31 +166,29 @@ namespace StaySeoul
             }
         }
 
-        private void SetActualUser()
+        private void SetActualUser(int UserType)
         {
-            int num = ActualUser.Username.Length;
-            ActualUser.Username.Remove(0, num);
-            int num2 = user.UserName.Length;
-            for (int i = 0; i < num2; i++)
+            UserLog userLog = new UserLog();
+            userLog.UserName = user.UserName;
+            userLog.Password = user.Password;
+            if (UserType == 0)
             {
-                ActualUser.Username.Append(user.UserName.ElementAt(i));
+                userLog.UserType = "Employee";
             }
+            else
+            {
+                userLog.UserType = "User";
+            }
+            
+            string jsonLink = JsonConvert.SerializeObject(userLog);
+            new GerenciadorArquivos().EscreverArquivo("UserLog", jsonLink);
+       
+        }
 
-            num = ActualUser.Password.Length;
-            ActualUser.Password.Remove(0, num);
-            num2 = user.Password.Length;
-            for (int i = 0; i < num2; i++)
-            {
-                ActualUser.Password.Append(user.Password.ElementAt(i));
-            }
-
-            num = ActualUser.UserType.Length;
-            ActualUser.UserType.Remove(0, num);
-            num2 = ("User").Length;
-            for (int i = 0; i < num2; i++)
-            {
-                ActualUser.UserType.Append(("User").ElementAt(i));
-            }
+        private void createAccountLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CreateAccountFrame createAccountFrame = new CreateAccountFrame();
+            createAccountFrame.Show();
         }
     }
 }

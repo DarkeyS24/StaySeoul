@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace StaySeoul.Classes.Views
 {
-    public partial class CreateAccountFrame : Form
+    public partial class EditListingForm : Form
     {
-        public CreateAccountFrame()
+        public EditListingForm()
         {
             InitializeComponent();
-        }
-
-        private void returnBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

@@ -32,29 +32,29 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.userTxt = new System.Windows.Forms.TextBox();
-            this.fullNameTxt = new System.Windows.Forms.TextBox();
-            this.pwsdTxt = new System.Windows.Forms.TextBox();
-            this.rePswdTxt = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.maleRb = new System.Windows.Forms.RadioButton();
-            this.femaleRb = new System.Windows.Forms.RadioButton();
-            this.familyNumber = new System.Windows.Forms.NumericUpDown();
-            this.dataPicker = new System.Windows.Forms.DateTimePicker();
+            this.termLink = new System.Windows.Forms.LinkLabel();
+            this.termCb = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataPicker = new System.Windows.Forms.DateTimePicker();
+            this.familyNumber = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.femaleRb = new System.Windows.Forms.RadioButton();
+            this.maleRb = new System.Windows.Forms.RadioButton();
+            this.rePswdTxt = new System.Windows.Forms.TextBox();
+            this.pwsdTxt = new System.Windows.Forms.TextBox();
+            this.fullNameTxt = new System.Windows.Forms.TextBox();
+            this.userTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.termCb = new System.Windows.Forms.CheckBox();
-            this.termLink = new System.Windows.Forms.LinkLabel();
             this.returnBtn = new System.Windows.Forms.Button();
             this.saveLoginBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.familyNumber)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -73,7 +73,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(3, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(418, 44);
+            this.label1.Size = new System.Drawing.Size(334, 35);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seoul Stay - Create Account";
             // 
@@ -110,37 +110,51 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Your information";
             // 
-            // userTxt
+            // termLink
             // 
-            this.userTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userTxt.Location = new System.Drawing.Point(150, 83);
-            this.userTxt.Name = "userTxt";
-            this.userTxt.Size = new System.Drawing.Size(249, 40);
-            this.userTxt.TabIndex = 1;
+            this.termLink.AutoSize = true;
+            this.termLink.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.termLink.Location = new System.Drawing.Point(464, 470);
+            this.termLink.Name = "termLink";
+            this.termLink.Size = new System.Drawing.Size(239, 24);
+            this.termLink.TabIndex = 16;
+            this.termLink.TabStop = true;
+            this.termLink.Text = "View Terms and Conditions";
             // 
-            // fullNameTxt
+            // termCb
             // 
-            this.fullNameTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.fullNameTxt.Location = new System.Drawing.Point(150, 181);
-            this.fullNameTxt.Name = "fullNameTxt";
-            this.fullNameTxt.Size = new System.Drawing.Size(249, 40);
-            this.fullNameTxt.TabIndex = 2;
+            this.termCb.AutoSize = true;
+            this.termCb.Location = new System.Drawing.Point(12, 464);
+            this.termCb.Name = "termCb";
+            this.termCb.Size = new System.Drawing.Size(449, 39);
+            this.termCb.TabIndex = 15;
+            this.termCb.Text = "I agree to the terms and conditions.";
+            this.termCb.UseVisualStyleBackColor = true;
             // 
-            // pwsdTxt
+            // label2
             // 
-            this.pwsdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pwsdTxt.Location = new System.Drawing.Point(150, 376);
-            this.pwsdTxt.Name = "pwsdTxt";
-            this.pwsdTxt.Size = new System.Drawing.Size(249, 40);
-            this.pwsdTxt.TabIndex = 4;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 82);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(142, 35);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Username:";
             // 
-            // rePswdTxt
+            // dataPicker
             // 
-            this.rePswdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rePswdTxt.Location = new System.Drawing.Point(629, 376);
-            this.rePswdTxt.Name = "rePswdTxt";
-            this.rePswdTxt.Size = new System.Drawing.Size(249, 40);
-            this.rePswdTxt.TabIndex = 5;
+            this.dataPicker.CustomFormat = "YYYY/MM/DD";
+            this.dataPicker.Location = new System.Drawing.Point(150, 280);
+            this.dataPicker.Name = "dataPicker";
+            this.dataPicker.Size = new System.Drawing.Size(501, 40);
+            this.dataPicker.TabIndex = 8;
+            this.dataPicker.Value = new System.DateTime(2005, 12, 19, 0, 0, 0, 0);
+            // 
+            // familyNumber
+            // 
+            this.familyNumber.Location = new System.Drawing.Point(754, 179);
+            this.familyNumber.Name = "familyNumber";
+            this.familyNumber.Size = new System.Drawing.Size(76, 40);
+            this.familyNumber.TabIndex = 7;
             // 
             // groupBox2
             // 
@@ -151,17 +165,6 @@
             this.groupBox2.Size = new System.Drawing.Size(275, 82);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            // 
-            // maleRb
-            // 
-            this.maleRb.AutoSize = true;
-            this.maleRb.Location = new System.Drawing.Point(15, 28);
-            this.maleRb.Name = "maleRb";
-            this.maleRb.Size = new System.Drawing.Size(95, 39);
-            this.maleRb.TabIndex = 0;
-            this.maleRb.TabStop = true;
-            this.maleRb.Text = "Male";
-            this.maleRb.UseVisualStyleBackColor = true;
             // 
             // femaleRb
             // 
@@ -174,30 +177,48 @@
             this.femaleRb.Text = "Female";
             this.femaleRb.UseVisualStyleBackColor = true;
             // 
-            // familyNumber
+            // maleRb
             // 
-            this.familyNumber.Location = new System.Drawing.Point(754, 179);
-            this.familyNumber.Name = "familyNumber";
-            this.familyNumber.Size = new System.Drawing.Size(76, 40);
-            this.familyNumber.TabIndex = 7;
+            this.maleRb.AutoSize = true;
+            this.maleRb.Location = new System.Drawing.Point(15, 28);
+            this.maleRb.Name = "maleRb";
+            this.maleRb.Size = new System.Drawing.Size(95, 39);
+            this.maleRb.TabIndex = 0;
+            this.maleRb.TabStop = true;
+            this.maleRb.Text = "Male";
+            this.maleRb.UseVisualStyleBackColor = true;
             // 
-            // dataPicker
+            // rePswdTxt
             // 
-            this.dataPicker.CustomFormat = "YYYY/MM/DD";
-            this.dataPicker.Location = new System.Drawing.Point(150, 280);
-            this.dataPicker.Name = "dataPicker";
-            this.dataPicker.Size = new System.Drawing.Size(501, 40);
-            this.dataPicker.TabIndex = 8;
-            this.dataPicker.Value = new System.DateTime(2005, 12, 19, 0, 0, 0, 0);
+            this.rePswdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rePswdTxt.Location = new System.Drawing.Point(629, 376);
+            this.rePswdTxt.Name = "rePswdTxt";
+            this.rePswdTxt.Size = new System.Drawing.Size(249, 40);
+            this.rePswdTxt.TabIndex = 5;
             // 
-            // label2
+            // pwsdTxt
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 35);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Username:";
+            this.pwsdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pwsdTxt.Location = new System.Drawing.Point(150, 376);
+            this.pwsdTxt.Name = "pwsdTxt";
+            this.pwsdTxt.Size = new System.Drawing.Size(249, 40);
+            this.pwsdTxt.TabIndex = 4;
+            // 
+            // fullNameTxt
+            // 
+            this.fullNameTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fullNameTxt.Location = new System.Drawing.Point(150, 181);
+            this.fullNameTxt.Name = "fullNameTxt";
+            this.fullNameTxt.Size = new System.Drawing.Size(249, 40);
+            this.fullNameTxt.TabIndex = 2;
+            // 
+            // userTxt
+            // 
+            this.userTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.userTxt.Location = new System.Drawing.Point(150, 83);
+            this.userTxt.Name = "userTxt";
+            this.userTxt.Size = new System.Drawing.Size(249, 40);
+            this.userTxt.TabIndex = 1;
             // 
             // label3
             // 
@@ -213,7 +234,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 280);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(153, 44);
+            this.label4.Size = new System.Drawing.Size(122, 35);
             this.label4.TabIndex = 11;
             this.label4.Text = "Birthday:";
             // 
@@ -222,7 +243,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 376);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(168, 44);
+            this.label5.Size = new System.Drawing.Size(134, 35);
             this.label5.TabIndex = 12;
             this.label5.Text = "Password:";
             // 
@@ -244,27 +265,6 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Number of family members:";
             // 
-            // termCb
-            // 
-            this.termCb.AutoSize = true;
-            this.termCb.Location = new System.Drawing.Point(12, 464);
-            this.termCb.Name = "termCb";
-            this.termCb.Size = new System.Drawing.Size(449, 39);
-            this.termCb.TabIndex = 15;
-            this.termCb.Text = "I agree to the terms and conditions.";
-            this.termCb.UseVisualStyleBackColor = true;
-            // 
-            // termLink
-            // 
-            this.termLink.AutoSize = true;
-            this.termLink.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.termLink.Location = new System.Drawing.Point(464, 470);
-            this.termLink.Name = "termLink";
-            this.termLink.Size = new System.Drawing.Size(239, 24);
-            this.termLink.TabIndex = 16;
-            this.termLink.TabStop = true;
-            this.termLink.Text = "View Terms and Conditions";
-            // 
             // returnBtn
             // 
             this.returnBtn.BackColor = System.Drawing.Color.White;
@@ -277,6 +277,7 @@
             this.returnBtn.TabIndex = 11;
             this.returnBtn.Text = "Return login form";
             this.returnBtn.UseVisualStyleBackColor = false;
+            this.returnBtn.Click += new System.EventHandler(this.returnBtn_Click);
             // 
             // saveLoginBtn
             // 
@@ -304,14 +305,13 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CreateAccountFrame";
-            this.Text = "CreateAccountFrame";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.familyNumber)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.familyNumber)).EndInit();
             this.ResumeLayout(false);
 
         }

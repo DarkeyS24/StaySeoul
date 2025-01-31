@@ -204,6 +204,7 @@
             this.createAccountLink.TabIndex = 8;
             this.createAccountLink.TabStop = true;
             this.createAccountLink.Text = "Create one";
+            this.createAccountLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.createAccountLink_LinkClicked);
             // 
             // loginBtn
             // 
