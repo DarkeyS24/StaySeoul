@@ -122,6 +122,7 @@ namespace StaySeoul
 
                     ManagementFrame man = new ManagementFrame(this);
                     man.SetNumber(1);
+                    man.setData(getData());
                     man.Show();
                 }
                 else
@@ -159,6 +160,7 @@ namespace StaySeoul
 
                     ManagementFrame man = new ManagementFrame(this);
                     man.SetNumber(0);
+                    man.setData(getData());
                     man.Show();
                 }
                 else
@@ -191,6 +193,19 @@ namespace StaySeoul
         {
             CreateAccountFrame createAccountFrame = new CreateAccountFrame();
             createAccountFrame.Show();
+        }
+    
+        public DataTable getData()
+        {
+            MySqlConnection con = new Connection().GetConnection();
+            con.Open();
+            string query = "Select * from items i join itemtypes it on i.ItemTypeID = it.ID join areas a on i.AreaID = a.ID";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            con.Close();
+            return dt;
         }
     }
 }

@@ -229,6 +229,7 @@
             this.logOutBtn.TabIndex = 11;
             this.logOutBtn.Text = "Log Out";
             this.logOutBtn.UseVisualStyleBackColor = false;
+            this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
             // 
             // ManagementFrame
             // 
