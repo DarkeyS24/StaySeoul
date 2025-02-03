@@ -96,10 +96,11 @@ namespace StaySeoul
             {
                 MySqlConnection con = new Connection().GetConnection();
                 con.Open();
-                string query = @"Select * from Users where Username = @user and Password = @password";
+                string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@user", userTxt.Text);
                 cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
+                cmd.Parameters.AddWithValue("@type", 2);
                 var resposta = cmd.ExecuteReader();
                 
                 if (resposta.Read())
@@ -119,9 +120,8 @@ namespace StaySeoul
                         SetActualUser(1);
                     }
 
-                    ManagementFrame man = new ManagementFrame();
-                    man.DisableTabs(1);
-                    this.Hide();
+                    ManagementFrame man = new ManagementFrame(this);
+                    man.SetNumber(1);
                     man.Show();
                 }
                 else
@@ -133,10 +133,11 @@ namespace StaySeoul
             {
                 MySqlConnection con = new Connection().GetConnection();
                 con.Open();
-                string query = @"Select * from Users where Username = @user and Password = @password";
+                string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@user", employeeTxt.Text);
                 cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
+                cmd.Parameters.AddWithValue("@type", 1);
                 var resposta = cmd.ExecuteReader();
                 User user = new User();
                 if (resposta.Read())
@@ -156,9 +157,8 @@ namespace StaySeoul
                         SetActualUser(0);  
                     }
 
-                    ManagementFrame man = new ManagementFrame();
-                    man.DisableTabs(0);
-                    this.Hide();
+                    ManagementFrame man = new ManagementFrame(this);
+                    man.SetNumber(0);
                     man.Show();
                 }
                 else

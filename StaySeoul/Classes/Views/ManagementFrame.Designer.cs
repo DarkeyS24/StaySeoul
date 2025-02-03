@@ -65,6 +65,7 @@
             this.travelerControl.SelectedIndex = 0;
             this.travelerControl.Size = new System.Drawing.Size(955, 401);
             this.travelerControl.TabIndex = 6;
+            this.travelerControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.travelerControl_Selecting);
             // 
             // travelerPage
             // 
@@ -159,6 +160,9 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(993, 41);
             this.panel1.TabIndex = 7;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown_1);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove_1);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp_1);
             // 
             // label1
             // 
@@ -212,6 +216,7 @@
             this.exitBtn.TabIndex = 10;
             this.exitBtn.Text = "Exit";
             this.exitBtn.UseVisualStyleBackColor = false;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
             // 
             // logOutBtn
             // 

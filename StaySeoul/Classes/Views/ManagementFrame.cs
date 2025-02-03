@@ -13,28 +13,36 @@ namespace StaySeoul.Classes.Views
 {
     public partial class ManagementFrame : Form
     {
-        public ManagementFrame()
+        private StaySeoul form;
+        private int num;
+        public ManagementFrame(StaySeoul form)
         {
             InitializeComponent();
+            this.form = form;
         }
 
         private bool pressBtn = false;
         private Point formPoint;
         private Point cursorPoint;
 
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        public void SetNumber(int num)
+        {
+            this.num = num;
+        }
+
+        private void panel1_MouseDown_1(object sender, MouseEventArgs e)
         {
             pressBtn = true;
             formPoint = this.Location;
             cursorPoint = Cursor.Position;
         }
 
-        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        private void panel1_MouseUp_1(object sender, MouseEventArgs e)
         {
             pressBtn = false;
         }
 
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        private void panel1_MouseMove_1(object sender, MouseEventArgs e)
         {
             if (pressBtn == true)
             {
@@ -43,17 +51,20 @@ namespace StaySeoul.Classes.Views
             }
         }
 
-        public void DisableTabs(int num)
+        private void exitBtn_Click(object sender, EventArgs e)
         {
-            if (num == 0)
+            this.Close();
+            form.Show();
+        }
+
+        private void travelerControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (num == 1)
             {
-                travelerControl.TabPages[1].Enabled = true;
-                travelerControl.TabPages[0].Enabled = true;
-            }
-            else
-            {
-                travelerControl.TabPages[1].Enabled = false;
-                travelerControl.TabPages[0].Enabled = true;
+                if (e.TabPageIndex == 1)
+                {
+                    e.Cancel = true;
+                }
             }
         }
     }
