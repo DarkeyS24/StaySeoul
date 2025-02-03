@@ -119,8 +119,9 @@ namespace StaySeoul
                         SetActualUser(1);
                     }
 
-                    ManagementFrame man = new ManagementFrame(this);
+                    ManagementFrame man = new ManagementFrame();
                     man.DisableTabs(1);
+                    this.Hide();
                     man.Show();
                 }
                 else
@@ -155,8 +156,9 @@ namespace StaySeoul
                         SetActualUser(0);  
                     }
 
-                    ManagementFrame man = new ManagementFrame(this);
+                    ManagementFrame man = new ManagementFrame();
                     man.DisableTabs(0);
+                    this.Hide();
                     man.Show();
                 }
                 else

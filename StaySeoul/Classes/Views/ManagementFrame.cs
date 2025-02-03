@@ -13,11 +13,9 @@ namespace StaySeoul.Classes.Views
 {
     public partial class ManagementFrame : Form
     {
-        private StaySeoul form;
-        public ManagementFrame(StaySeoul form)
+        public ManagementFrame()
         {
             InitializeComponent();
-            this.form = form;
         }
 
         private bool pressBtn = false;
