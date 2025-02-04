@@ -35,7 +35,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.travelerSearchTxt = new System.Windows.Forms.TextBox();
             this.ownerPage = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.employeeTable = new System.Windows.Forms.DataGridView();
             this.addBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,12 +44,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.exitBtn = new System.Windows.Forms.Button();
             this.logOutBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.travelerControl.SuspendLayout();
             this.travelerPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.travelerTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.ownerPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeTable)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -113,7 +114,8 @@
             // 
             // ownerPage
             // 
-            this.ownerPage.Controls.Add(this.dataGridView1);
+            this.ownerPage.Controls.Add(this.button1);
+            this.ownerPage.Controls.Add(this.employeeTable);
             this.ownerPage.Controls.Add(this.addBtn);
             this.ownerPage.Location = new System.Drawing.Point(4, 42);
             this.ownerPage.Name = "ownerPage";
@@ -123,19 +125,20 @@
             this.ownerPage.Text = "I\'m Owner / Manager";
             this.ownerPage.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // employeeTable
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 78);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(912, 261);
-            this.dataGridView1.TabIndex = 14;
+            this.employeeTable.AllowUserToAddRows = false;
+            this.employeeTable.AllowUserToDeleteRows = false;
+            this.employeeTable.AllowUserToResizeRows = false;
+            this.employeeTable.BackgroundColor = System.Drawing.Color.White;
+            this.employeeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeeTable.Location = new System.Drawing.Point(17, 78);
+            this.employeeTable.Name = "employeeTable";
+            this.employeeTable.RowHeadersWidth = 51;
+            this.employeeTable.RowTemplate.Height = 24;
+            this.employeeTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.employeeTable.Size = new System.Drawing.Size(912, 261);
+            this.employeeTable.TabIndex = 14;
             // 
             // addBtn
             // 
@@ -231,6 +234,19 @@
             this.logOutBtn.UseVisualStyleBackColor = false;
             this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.button1.Location = new System.Drawing.Point(766, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 50);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Edit details";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // ManagementFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -252,7 +268,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.travelerTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ownerPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeTable)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -276,7 +292,8 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TextBox travelerSearchTxt;
         private System.Windows.Forms.DataGridView travelerTable;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView employeeTable;
         private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Button button1;
     }
 }

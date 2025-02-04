@@ -16,7 +16,9 @@ namespace StaySeoul.Classes.Views
     {
         private StaySeoul form;
         private int num;
-        private List<Item> itemList = new List<Item>();
+        private int travelerItemsNum;
+        private int employeeItemsNum;
+
         public ManagementFrame(StaySeoul form)
         {
             InitializeComponent();
@@ -66,6 +68,16 @@ namespace StaySeoul.Classes.Views
                 {
                     e.Cancel = true;
                 }
+            }else if (num == 0)
+            {
+                if (e.TabPageIndex == 1)
+                {
+                    itemLbl.Text = employeeItemsNum + " items found";
+                }
+                else
+                {
+                    itemLbl.Text = travelerItemsNum + " items found";
+                }
             }
         }
 
@@ -75,43 +87,14 @@ namespace StaySeoul.Classes.Views
             form.Show();
         }
 
-        public void setData(DataTable table)
+        public void setData(DataTable travTable, DataTable userTable)
         {
-            //foreach(DataRow row in table.Rows)
-            //{
-            //    //Item item = new Item();
+            travelerTable.DataSource = travTable;
+            itemLbl.Text = travTable.Rows.Count + " items found";
 
-            //    //item.Id = (int)(row["ID"]);  
-            //    //item.GUID = row["GUID"].ToString();
-            //    //item.UserId = (int)(row["UserID"]);
-            //    //item.ItemTypeId = (int)(row["ItemTypeID"]);
-            //    //item.AreaId = (int)(row["AreaID"]);
-            //    //item.Title = row["Title"].ToString();
-            //    //item.Capacity = (int)(row["Capacity"]);
-            //    //item.NumberOfBeds = (int)(row["NumberOfBeds"]);
-            //    //item.NumberOfBedrooms = (int)(row["NumberOfBedrooms"]);
-            //    //item.NumberOfBathrooms = (int)(row["NumberOfBathrooms"]);
-            //    //item.ExactAddress = row["ExactAddress"].ToString();
-            //    //item.ApproximateAddress = row["ApproximateAddress"].ToString();
-            //    //item.Description = row["Description"].ToString();
-            //    //item.HostRules = row["HostRules"].ToString();
-            //    //item.MinimumNights = (int)(row["MinimumNights"]);
-            //    //item.MaximumNights = (int)(row["MaximumNights"]);
-
-            //    //itemList.Add(item);
-            //}
-
-            DataTable filteredTable = table.Copy();
-
-            foreach (DataColumn col in table.Columns)
-            {
-                if (col.ColumnName != "ID" && col.ColumnName != "ID1" && col.ColumnName != "ID2" && col.ColumnName != "Title" && col.ColumnName != "Capacity" && col.ColumnName != "Name" && col.ColumnName != "Name1")
-                {
-                    filteredTable.Columns.Remove(col.ColumnName);
-                }
-            }
-            travelerTable.DataSource = filteredTable;
-
+            employeeTable.DataSource = userTable;
+            travelerItemsNum = travTable.Rows.Count;
+            employeeItemsNum = userTable.Rows.Count;
         }
     }
 }

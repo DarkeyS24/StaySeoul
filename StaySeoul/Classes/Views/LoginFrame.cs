@@ -20,29 +20,11 @@ namespace StaySeoul
     public partial class StaySeoul : Form
     {
         private User user = new User();
+        private int number = 0;
         public StaySeoul()
         {
-            string conteudo = new GerenciadorArquivos().LerArquivo("UserLog");
-            if (string.IsNullOrEmpty(conteudo))
-            {
-                InitializeComponent();
-            }
-            else
-            {
-                InitializeComponent();
-                UserLog newUser = JsonConvert.DeserializeObject<UserLog>(conteudo);
-                if (newUser.UserType.Equals("Employee"))
-                {
-                    employeeTxt.Text = newUser.UserName;
-                    pswdTxt.Text = newUser.Password;
-                }
-                else
-                {
-                    userTxt.Text = newUser.UserName;
-                    pswdTxt.Text = newUser.Password;
-                }
-                loginBtn_Click(this, new EventArgs());
-            }
+            InitializeComponent();
+            loginBtn_Click(this, new EventArgs());
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -59,12 +41,10 @@ namespace StaySeoul
             formPoint = this.Location;
             cursorPoint = Cursor.Position;
         }
-
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             pressBtn = false;
         }
-
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (pressBtn == true)
@@ -73,7 +53,6 @@ namespace StaySeoul
                 this.Location = Point.Add(formPoint, new Size(dif));
             }
         }
-
         private void showPswdCb_CheckedChanged(object sender, EventArgs e)
         {
             if (showPswdCb.Checked == true)
@@ -88,99 +67,120 @@ namespace StaySeoul
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(employeeTxt.Text) && string.IsNullOrEmpty(userTxt.Text))
+            if (number == 0)
             {
-                MessageBox.Show("Some fields are empty");
-            }
-            else if (string.IsNullOrEmpty(employeeTxt.Text))
-            {
-                MySqlConnection con = new Connection().GetConnection();
-                con.Open();
-                string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@user", userTxt.Text);
-                cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
-                cmd.Parameters.AddWithValue("@type", 2);
-                var resposta = cmd.ExecuteReader();
-                
-                if (resposta.Read())
+                string conteudo = new GerenciadorArquivos().LerArquivo("UserLog");
+                if (!string.IsNullOrEmpty(conteudo))
                 {
-                    user.Id = resposta.GetInt32(0);
-                    user.GUID = resposta.GetString(1);
-                    user.UserTypeId = resposta.GetInt32(2);
-                    user.UserName = resposta.GetString(3);
-                    user.Password = resposta.GetString(4);
-                    user.FullName = resposta.GetString(5);
-                    user.Gender = resposta.GetInt32(6);
-                    user.BirthDate = resposta.GetDateTime(7);
-                    user.FamilyCount = resposta.GetInt32(8);
-
-                    if (signedCb.Checked == true)
+                    UserLog newUser = JsonConvert.DeserializeObject<UserLog>(conteudo);
+                    if (newUser.UserType.Equals("Employee"))
                     {
-                        SetActualUser(1);
+                        employeeTxt.Text = newUser.UserName;
+                        pswdTxt.Text = newUser.Password;
                     }
+                    else
+                    {
+                        userTxt.Text = newUser.UserName;
+                        pswdTxt.Text = newUser.Password;
+                    }
+                }
+            }
+            
+                if (string.IsNullOrEmpty(employeeTxt.Text) && string.IsNullOrEmpty(userTxt.Text))
+                {
+                    MessageBox.Show("Some fields are empty");
+                }
+                else if (string.IsNullOrEmpty(employeeTxt.Text))
+                {
+                    MySqlConnection con = new Connection().GetConnection();
+                    con.Open();
+                    string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@user", userTxt.Text);
+                    cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
+                    cmd.Parameters.AddWithValue("@type", 2);
+                    var resposta = cmd.ExecuteReader();
 
-                    ManagementFrame man = new ManagementFrame(this);
-                    man.SetNumber(1);
-                    man.setData(getData());
-                    man.Show();
+                    if (resposta.Read())
+                    {
+                        user.Id = resposta.GetInt32(0);
+                        user.GUID = resposta.GetGuid(1);
+                        user.UserTypeId = resposta.GetInt32(2);
+                        user.UserName = resposta.GetString(3);
+                        user.Password = resposta.GetString(4);
+                        user.FullName = resposta.GetString(5);
+                        user.Gender = resposta.GetInt32(6);
+                        user.BirthDate = resposta.GetDateTime(7);
+                        user.FamilyCount = resposta.GetInt32(8);
+
+                        if (signedCb.Checked == true)
+                        {
+                            SetActualUser(1);
+                        }
+
+                        number = 0;
+                        ManagementFrame man = new ManagementFrame(this);
+                        man.SetNumber(1);
+                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)));
+                        man.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("User not found");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("User not found");
-                }
-            }
-            else
-            {
-                MySqlConnection con = new Connection().GetConnection();
-                con.Open();
-                string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
-                MySqlCommand cmd = new MySqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@user", employeeTxt.Text);
-                cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
-                cmd.Parameters.AddWithValue("@type", 1);
-                var resposta = cmd.ExecuteReader();
-                User user = new User();
-                if (resposta.Read())
-                {
-                    user.Id = resposta.GetInt32(0);
-                    user.GUID = resposta.GetString(1);
-                    user.UserTypeId = resposta.GetInt32(2);
-                    user.UserName = resposta.GetString(3);
-                    user.Password = resposta.GetString(4);
-                    user.FullName = resposta.GetString(5);
-                    user.Gender = resposta.GetInt32(6);
-                    user.BirthDate = resposta.GetDateTime(7);
-                    user.FamilyCount = resposta.GetInt32(8);
-
-                    if (signedCb.Checked == true)
+                    MySqlConnection con = new Connection().GetConnection();
+                    con.Open();
+                    string query = @"Select * from Users where Username = @user and Password = @password and UserTypeID = @type";
+                    MySqlCommand cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@user", employeeTxt.Text);
+                    cmd.Parameters.AddWithValue("@password", pswdTxt.Text);
+                    cmd.Parameters.AddWithValue("@type", 1);
+                    var resposta = cmd.ExecuteReader();
+                    User user = new User();
+                    if (resposta.Read())
                     {
-                        SetActualUser(0);  
-                    }
+                        user.Id = resposta.GetInt32(0);
+                        user.GUID = resposta.GetGuid(1);
+                        user.UserTypeId = resposta.GetInt32(2);
+                        user.UserName = resposta.GetString(3);
+                        user.Password = resposta.GetString(4);
+                        user.FullName = resposta.GetString(5);
+                        user.Gender = resposta.GetInt32(6);
+                        user.BirthDate = resposta.GetDateTime(7);
+                        user.FamilyCount = resposta.GetInt32(8);
 
-                    ManagementFrame man = new ManagementFrame(this);
-                    man.SetNumber(0);
-                    man.setData(getData());
-                    man.Show();
+                        if (signedCb.Checked == true)
+                        {
+                            SetActualUser(0);
+                        }
+
+                        ManagementFrame man = new ManagementFrame(this);
+                        man.SetNumber(0);
+                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)));
+                        man.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Employee not found");
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Employee not found");
-                }
-            }
         }
 
         private void SetActualUser(int UserType)
         {
             UserLog userLog = new UserLog();
-            userLog.UserName = user.UserName;
-            userLog.Password = user.Password;
+            userLog.Password = pswdTxt.Text;
             if (UserType == 0)
             {
+                userLog.UserName = employeeTxt.Text;
                 userLog.UserType = "Employee";
             }
             else
             {
+                userLog.UserName = userTxt.Text;
                 userLog.UserType = "User";
             }
             
@@ -195,17 +195,40 @@ namespace StaySeoul
             createAccountFrame.Show();
         }
     
-        public DataTable getData()
+        public DataTable GetTravelerData()
         {
             MySqlConnection con = new Connection().GetConnection();
             con.Open();
-            string query = "Select * from items i join itemtypes it on i.ItemTypeID = it.ID join areas a on i.AreaID = a.ID";
+            string query = "Select i.Title, i.Capacity, it.Name, a.Name from items i join itemtypes it on i.ItemTypeID = it.ID join areas a on i.AreaID = a.ID";
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader reader = cmd.ExecuteReader();
             DataTable dt = new DataTable();
             dt.Load(reader);
             con.Close();
             return dt;
+        }
+
+        public DataTable GetUserData(int id)
+        {
+            MySqlConnection con = new Connection().GetConnection();
+            con.Open();
+            string query = "Select i.Title, i.Capacity, it.Name, a.Name from items i inner join itemtypes it on i.ItemTypeID = it.ID inner join areas a on i.AreaID = a.ID inner join users u on i.UserID = u.ID and u.ID = @id";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@id", id);
+            MySqlDataReader reader = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(reader);
+            con.Close();
+            return dt;
+        }
+
+        public void SetTextBox(string userName, string pswd)
+        {
+            number = 1;
+            userTxt.Text = userName;
+            employeeTxt.Text = "";
+            pswdTxt.Text = pswd;
+            loginBtn_Click(this, new EventArgs());
         }
     }
 }

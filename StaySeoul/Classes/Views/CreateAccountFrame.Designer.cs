@@ -1,4 +1,6 @@
-﻿namespace StaySeoul.Classes.Views
+﻿using System.Windows.Forms;
+
+namespace StaySeoul.Classes.Views
 {
     partial class CreateAccountFrame
     {
@@ -41,7 +43,7 @@
             this.femaleRb = new System.Windows.Forms.RadioButton();
             this.maleRb = new System.Windows.Forms.RadioButton();
             this.rePswdTxt = new System.Windows.Forms.TextBox();
-            this.pwsdTxt = new System.Windows.Forms.TextBox();
+            this.pswdTxt = new System.Windows.Forms.TextBox();
             this.fullNameTxt = new System.Windows.Forms.TextBox();
             this.userTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,17 +63,20 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(26)))), ((int)(((byte)(46)))));
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(1, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(981, 41);
             this.panel1.TabIndex = 2;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(3, 2);
+            this.label1.Location = new System.Drawing.Point(2, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(334, 35);
             this.label1.TabIndex = 0;
@@ -94,7 +99,7 @@
             this.groupBox1.Controls.Add(this.familyNumber);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.rePswdTxt);
-            this.groupBox1.Controls.Add(this.pwsdTxt);
+            this.groupBox1.Controls.Add(this.pswdTxt);
             this.groupBox1.Controls.Add(this.fullNameTxt);
             this.groupBox1.Controls.Add(this.userTxt);
             this.groupBox1.Controls.Add(this.label3);
@@ -103,9 +108,9 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(59, 90);
+            this.groupBox1.Location = new System.Drawing.Point(32, 68);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(887, 520);
+            this.groupBox1.Size = new System.Drawing.Size(932, 542);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Your information";
@@ -114,7 +119,7 @@
             // 
             this.termLink.AutoSize = true;
             this.termLink.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.termLink.Location = new System.Drawing.Point(464, 470);
+            this.termLink.Location = new System.Drawing.Point(464, 475);
             this.termLink.Name = "termLink";
             this.termLink.Size = new System.Drawing.Size(239, 24);
             this.termLink.TabIndex = 16;
@@ -124,7 +129,7 @@
             // termCb
             // 
             this.termCb.AutoSize = true;
-            this.termCb.Location = new System.Drawing.Point(12, 464);
+            this.termCb.Location = new System.Drawing.Point(12, 469);
             this.termCb.Name = "termCb";
             this.termCb.Size = new System.Drawing.Size(449, 39);
             this.termCb.TabIndex = 15;
@@ -142,19 +147,20 @@
             // 
             // dataPicker
             // 
-            this.dataPicker.CustomFormat = "YYYY/MM/DD";
+            this.dataPicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dataPicker.Location = new System.Drawing.Point(150, 280);
             this.dataPicker.Name = "dataPicker";
-            this.dataPicker.Size = new System.Drawing.Size(501, 40);
+            this.dataPicker.Size = new System.Drawing.Size(196, 40);
             this.dataPicker.TabIndex = 8;
             this.dataPicker.Value = new System.DateTime(2005, 12, 19, 0, 0, 0, 0);
             // 
             // familyNumber
             // 
-            this.familyNumber.Location = new System.Drawing.Point(754, 179);
+            this.familyNumber.Location = new System.Drawing.Point(827, 181);
             this.familyNumber.Name = "familyNumber";
             this.familyNumber.Size = new System.Drawing.Size(76, 40);
             this.familyNumber.TabIndex = 7;
+            this.familyNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 
@@ -162,14 +168,14 @@
             this.groupBox2.Controls.Add(this.maleRb);
             this.groupBox2.Location = new System.Drawing.Point(476, 54);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(275, 82);
+            this.groupBox2.Size = new System.Drawing.Size(339, 82);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
             // femaleRb
             // 
             this.femaleRb.AutoSize = true;
-            this.femaleRb.Location = new System.Drawing.Point(147, 28);
+            this.femaleRb.Location = new System.Drawing.Point(169, 28);
             this.femaleRb.Name = "femaleRb";
             this.femaleRb.Size = new System.Drawing.Size(121, 39);
             this.femaleRb.TabIndex = 1;
@@ -191,18 +197,18 @@
             // rePswdTxt
             // 
             this.rePswdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rePswdTxt.Location = new System.Drawing.Point(629, 376);
+            this.rePswdTxt.Location = new System.Drawing.Point(654, 376);
             this.rePswdTxt.Name = "rePswdTxt";
             this.rePswdTxt.Size = new System.Drawing.Size(249, 40);
             this.rePswdTxt.TabIndex = 5;
             // 
-            // pwsdTxt
+            // pswdTxt
             // 
-            this.pwsdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pwsdTxt.Location = new System.Drawing.Point(150, 376);
-            this.pwsdTxt.Name = "pwsdTxt";
-            this.pwsdTxt.Size = new System.Drawing.Size(249, 40);
-            this.pwsdTxt.TabIndex = 4;
+            this.pswdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pswdTxt.Location = new System.Drawing.Point(155, 376);
+            this.pswdTxt.Name = "pswdTxt";
+            this.pswdTxt.Size = new System.Drawing.Size(249, 40);
+            this.pswdTxt.TabIndex = 4;
             // 
             // fullNameTxt
             // 
@@ -215,7 +221,7 @@
             // userTxt
             // 
             this.userTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userTxt.Location = new System.Drawing.Point(150, 83);
+            this.userTxt.Location = new System.Drawing.Point(155, 83);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(249, 40);
             this.userTxt.TabIndex = 1;
@@ -250,7 +256,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(409, 378);
+            this.label6.Location = new System.Drawing.Point(419, 378);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(223, 35);
             this.label6.TabIndex = 13;
@@ -259,7 +265,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(411, 181);
+            this.label7.Location = new System.Drawing.Point(455, 183);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(343, 35);
             this.label7.TabIndex = 14;
@@ -291,6 +297,7 @@
             this.saveLoginBtn.TabIndex = 12;
             this.saveLoginBtn.Text = "Register and login";
             this.saveLoginBtn.UseVisualStyleBackColor = false;
+            this.saveLoginBtn.Click += new System.EventHandler(this.saveLoginBtn_Click);
             // 
             // CreateAccountFrame
             // 
@@ -324,7 +331,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox rePswdTxt;
-        private System.Windows.Forms.TextBox pwsdTxt;
+        private System.Windows.Forms.TextBox pswdTxt;
         private System.Windows.Forms.TextBox fullNameTxt;
         private System.Windows.Forms.TextBox userTxt;
         private System.Windows.Forms.DateTimePicker dataPicker;
