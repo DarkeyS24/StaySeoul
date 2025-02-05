@@ -35,6 +35,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.travelerSearchTxt = new System.Windows.Forms.TextBox();
             this.ownerPage = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.employeeTable = new System.Windows.Forms.DataGridView();
             this.addBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -44,7 +45,6 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.exitBtn = new System.Windows.Forms.Button();
             this.logOutBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.travelerControl.SuspendLayout();
             this.travelerPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.travelerTable)).BeginInit();
@@ -125,6 +125,19 @@
             this.ownerPage.Text = "I\'m Owner / Manager";
             this.ownerPage.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.button1.Location = new System.Drawing.Point(766, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 50);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Edit details";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // employeeTable
             // 
             this.employeeTable.AllowUserToAddRows = false;
@@ -154,6 +167,7 @@
             this.addBtn.Text = "Add listing";
             this.addBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // panel1
             // 
@@ -233,19 +247,6 @@
             this.logOutBtn.Text = "Log Out";
             this.logOutBtn.UseVisualStyleBackColor = false;
             this.logOutBtn.Click += new System.EventHandler(this.logOutBtn_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.button1.Location = new System.Drawing.Point(766, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 50);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Edit details";
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // ManagementFrame
             // 

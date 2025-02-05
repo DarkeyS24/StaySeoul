@@ -155,6 +155,12 @@
     <Compile Include="Classes\Views\ManagementFrame.Designer.cs">
       <DependentUpon>ManagementFrame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Views\Terms.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Classes\Views\Terms.Designer.cs">
+      <DependentUpon>Terms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ActualUser.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Classes\Views\ManagementFrame.resx">
       <DependentUpon>ManagementFrame.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\Views\Terms.resx">
+      <DependentUpon>Terms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

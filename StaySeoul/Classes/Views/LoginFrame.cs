@@ -121,7 +121,7 @@ namespace StaySeoul
                         number = 0;
                         ManagementFrame man = new ManagementFrame(this);
                         man.SetNumber(1);
-                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)));
+                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)), (int)(user.Id));
                         man.Show();
                     }
                     else
@@ -159,7 +159,7 @@ namespace StaySeoul
 
                         ManagementFrame man = new ManagementFrame(this);
                         man.SetNumber(0);
-                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)));
+                        man.setData(GetTravelerData(), GetUserData((int)(user.Id)), (int)(user.Id));
                         man.Show();
                     }
                     else

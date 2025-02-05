@@ -53,6 +53,7 @@ namespace StaySeoul.Classes.Views
             this.label7 = new System.Windows.Forms.Label();
             this.returnBtn = new System.Windows.Forms.Button();
             this.saveLoginBtn = new System.Windows.Forms.Button();
+            this.terms1 = new Terms();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.familyNumber)).BeginInit();
@@ -119,12 +120,13 @@ namespace StaySeoul.Classes.Views
             // 
             this.termLink.AutoSize = true;
             this.termLink.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.termLink.Location = new System.Drawing.Point(464, 475);
+            this.termLink.Location = new System.Drawing.Point(505, 475);
             this.termLink.Name = "termLink";
             this.termLink.Size = new System.Drawing.Size(239, 24);
             this.termLink.TabIndex = 16;
             this.termLink.TabStop = true;
             this.termLink.Text = "View Terms and Conditions";
+            this.termLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.termLink_LinkClicked);
             // 
             // termCb
             // 
@@ -299,12 +301,21 @@ namespace StaySeoul.Classes.Views
             this.saveLoginBtn.UseVisualStyleBackColor = false;
             this.saveLoginBtn.Click += new System.EventHandler(this.saveLoginBtn_Click);
             // 
+            // terms1
+            // 
+            this.terms1.Location = new System.Drawing.Point(307, 107);
+            this.terms1.Name = "terms";
+            this.terms1.Size = new System.Drawing.Size(392, 412);
+            this.terms1.TabIndex = 13;
+            this.terms1.Visible = false;
+            // 
             // CreateAccountFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(976, 734);
+            this.Controls.Add(this.terms1);
             this.Controls.Add(this.saveLoginBtn);
             this.Controls.Add(this.returnBtn);
             this.Controls.Add(this.groupBox1);
@@ -348,5 +359,6 @@ namespace StaySeoul.Classes.Views
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button returnBtn;
         private System.Windows.Forms.Button saveLoginBtn;
+        private Terms terms1;
     }
 }

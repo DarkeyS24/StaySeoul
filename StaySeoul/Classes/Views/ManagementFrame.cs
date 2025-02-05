@@ -16,6 +16,7 @@ namespace StaySeoul.Classes.Views
     {
         private StaySeoul form;
         private int num;
+        private int employeeId;
         private int travelerItemsNum;
         private int employeeItemsNum;
 
@@ -87,14 +88,23 @@ namespace StaySeoul.Classes.Views
             form.Show();
         }
 
-        public void setData(DataTable travTable, DataTable userTable)
+        public void setData(DataTable travTable, DataTable userTable, int employeeId)
         {
+            this.employeeId = employeeId;
+
             travelerTable.DataSource = travTable;
             itemLbl.Text = travTable.Rows.Count + " items found";
 
             employeeTable.DataSource = userTable;
             travelerItemsNum = travTable.Rows.Count;
             employeeItemsNum = userTable.Rows.Count;
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            EditListingForm add = new EditListingForm(this, employeeId);
+            add.SetAddFields();
+            add.Show();
         }
     }
 }

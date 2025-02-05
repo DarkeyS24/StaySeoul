@@ -31,8 +31,21 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.managementTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.maxNumber = new System.Windows.Forms.NumericUpDown();
+            this.minNumber = new System.Windows.Forms.NumericUpDown();
+            this.rulesTxt = new System.Windows.Forms.RichTextBox();
+            this.descTxt = new System.Windows.Forms.RichTextBox();
+            this.exactAddressTxt = new System.Windows.Forms.RichTextBox();
+            this.approximateAddressTxt = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.bathroomsNumber = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.bedroomsNumber = new System.Windows.Forms.NumericUpDown();
@@ -46,39 +59,26 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.SaveBtn = new System.Windows.Forms.Button();
-            this.nextBtn = new System.Windows.Forms.Button();
-            this.finishBtn = new System.Windows.Forms.Button();
-            this.CancelBtn = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.approximateAddressTxt = new System.Windows.Forms.TextBox();
-            this.exactAddressTxt = new System.Windows.Forms.RichTextBox();
-            this.descTxt = new System.Windows.Forms.RichTextBox();
-            this.rulesTxt = new System.Windows.Forms.RichTextBox();
-            this.minNumber = new System.Windows.Forms.NumericUpDown();
-            this.maxNumber = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.checkList = new System.Windows.Forms.CheckedListBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.AttractionDistanceTable = new System.Windows.Forms.DataGridView();
+            this.label16 = new System.Windows.Forms.Label();
+            this.saveBtn = new System.Windows.Forms.Button();
+            this.nextBtn = new System.Windows.Forms.Button();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.managementTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bathroomsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedroomsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedsNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.capaciyNumber)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttractionDistanceTable)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,17 +110,18 @@
             this.panel2.Size = new System.Drawing.Size(977, 41);
             this.panel2.TabIndex = 4;
             // 
-            // tabControl1
+            // managementTab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 60);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(952, 576);
-            this.tabControl1.TabIndex = 5;
+            this.managementTab.Controls.Add(this.tabPage1);
+            this.managementTab.Controls.Add(this.tabPage2);
+            this.managementTab.Controls.Add(this.tabPage3);
+            this.managementTab.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.managementTab.Location = new System.Drawing.Point(12, 60);
+            this.managementTab.Name = "managementTab";
+            this.managementTab.SelectedIndex = 0;
+            this.managementTab.Size = new System.Drawing.Size(952, 576);
+            this.managementTab.TabIndex = 5;
+            this.managementTab.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.managementTab_Selecting);
             // 
             // tabPage1
             // 
@@ -157,6 +158,121 @@
             this.tabPage1.Size = new System.Drawing.Size(944, 530);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listing Details";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(545, 486);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(116, 28);
+            this.label14.TabIndex = 24;
+            this.label14.Text = "Maximum:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(325, 486);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(112, 28);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Minimum:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(20, 486);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(264, 28);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Reservation Time (Nights):";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(20, 408);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(119, 28);
+            this.label11.TabIndex = 21;
+            this.label11.Text = "Host Rules:";
+            // 
+            // maxNumber
+            // 
+            this.maxNumber.Location = new System.Drawing.Point(673, 483);
+            this.maxNumber.Name = "maxNumber";
+            this.maxNumber.Size = new System.Drawing.Size(73, 36);
+            this.maxNumber.TabIndex = 20;
+            // 
+            // minNumber
+            // 
+            this.minNumber.Location = new System.Drawing.Point(448, 482);
+            this.minNumber.Name = "minNumber";
+            this.minNumber.Size = new System.Drawing.Size(73, 36);
+            this.minNumber.TabIndex = 19;
+            // 
+            // rulesTxt
+            // 
+            this.rulesTxt.Location = new System.Drawing.Point(267, 405);
+            this.rulesTxt.Name = "rulesTxt";
+            this.rulesTxt.Size = new System.Drawing.Size(644, 66);
+            this.rulesTxt.TabIndex = 18;
+            this.rulesTxt.Text = "";
+            // 
+            // descTxt
+            // 
+            this.descTxt.Location = new System.Drawing.Point(267, 329);
+            this.descTxt.Name = "descTxt";
+            this.descTxt.Size = new System.Drawing.Size(644, 66);
+            this.descTxt.TabIndex = 17;
+            this.descTxt.Text = "";
+            // 
+            // exactAddressTxt
+            // 
+            this.exactAddressTxt.Location = new System.Drawing.Point(267, 253);
+            this.exactAddressTxt.Name = "exactAddressTxt";
+            this.exactAddressTxt.Size = new System.Drawing.Size(644, 66);
+            this.exactAddressTxt.TabIndex = 16;
+            this.exactAddressTxt.Text = "";
+            // 
+            // approximateAddressTxt
+            // 
+            this.approximateAddressTxt.Location = new System.Drawing.Point(267, 197);
+            this.approximateAddressTxt.Name = "approximateAddressTxt";
+            this.approximateAddressTxt.Size = new System.Drawing.Size(644, 36);
+            this.approximateAddressTxt.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(20, 336);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(127, 28);
+            this.label10.TabIndex = 14;
+            this.label10.Text = "Description:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(20, 259);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(150, 28);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Exact Address:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(19, 201);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(224, 28);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Approximate Address:";
             // 
             // bathroomsNumber
             // 
@@ -271,6 +387,24 @@
             this.tabPage2.Text = "Amenities";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // checkList
+            // 
+            this.checkList.FormattingEnabled = true;
+            this.checkList.Location = new System.Drawing.Point(24, 68);
+            this.checkList.Name = "checkList";
+            this.checkList.Size = new System.Drawing.Size(538, 424);
+            this.checkList.TabIndex = 1;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(18, 20);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(282, 28);
+            this.label15.TabIndex = 0;
+            this.label15.Text = "Choose Available Amenities:";
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.AttractionDistanceTable);
@@ -283,182 +417,17 @@
             this.tabPage3.Text = "Distance to Attraction";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // SaveBtn
+            // AttractionDistanceTable
             // 
-            this.SaveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaveBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SaveBtn.Location = new System.Drawing.Point(762, 641);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(184, 45);
-            this.SaveBtn.TabIndex = 6;
-            this.SaveBtn.Text = "Save";
-            this.SaveBtn.UseVisualStyleBackColor = true;
-            // 
-            // nextBtn
-            // 
-            this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nextBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nextBtn.Location = new System.Drawing.Point(623, 641);
-            this.nextBtn.Name = "nextBtn";
-            this.nextBtn.Size = new System.Drawing.Size(123, 45);
-            this.nextBtn.TabIndex = 7;
-            this.nextBtn.Text = "Next";
-            this.nextBtn.UseVisualStyleBackColor = true;
-            // 
-            // finishBtn
-            // 
-            this.finishBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.finishBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.finishBtn.Location = new System.Drawing.Point(762, 641);
-            this.finishBtn.Name = "finishBtn";
-            this.finishBtn.Size = new System.Drawing.Size(184, 45);
-            this.finishBtn.TabIndex = 8;
-            this.finishBtn.Text = "Finish";
-            this.finishBtn.UseVisualStyleBackColor = true;
-            // 
-            // CancelBtn
-            // 
-            this.CancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CancelBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelBtn.Location = new System.Drawing.Point(762, 641);
-            this.CancelBtn.Name = "CancelBtn";
-            this.CancelBtn.Size = new System.Drawing.Size(184, 45);
-            this.CancelBtn.TabIndex = 9;
-            this.CancelBtn.Text = "Cancel";
-            this.CancelBtn.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(19, 201);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(224, 28);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Approximate Address:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(20, 259);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(150, 28);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "Exact Address:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(20, 336);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(127, 28);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Description:";
-            // 
-            // approximateAddressTxt
-            // 
-            this.approximateAddressTxt.Location = new System.Drawing.Point(267, 197);
-            this.approximateAddressTxt.Name = "approximateAddressTxt";
-            this.approximateAddressTxt.Size = new System.Drawing.Size(644, 36);
-            this.approximateAddressTxt.TabIndex = 15;
-            // 
-            // exactAddressTxt
-            // 
-            this.exactAddressTxt.Location = new System.Drawing.Point(267, 253);
-            this.exactAddressTxt.Name = "exactAddressTxt";
-            this.exactAddressTxt.Size = new System.Drawing.Size(644, 66);
-            this.exactAddressTxt.TabIndex = 16;
-            this.exactAddressTxt.Text = "";
-            // 
-            // descTxt
-            // 
-            this.descTxt.Location = new System.Drawing.Point(267, 329);
-            this.descTxt.Name = "descTxt";
-            this.descTxt.Size = new System.Drawing.Size(644, 66);
-            this.descTxt.TabIndex = 17;
-            this.descTxt.Text = "";
-            // 
-            // rulesTxt
-            // 
-            this.rulesTxt.Location = new System.Drawing.Point(267, 405);
-            this.rulesTxt.Name = "rulesTxt";
-            this.rulesTxt.Size = new System.Drawing.Size(644, 66);
-            this.rulesTxt.TabIndex = 18;
-            this.rulesTxt.Text = "";
-            // 
-            // minNumber
-            // 
-            this.minNumber.Location = new System.Drawing.Point(448, 482);
-            this.minNumber.Name = "minNumber";
-            this.minNumber.Size = new System.Drawing.Size(73, 36);
-            this.minNumber.TabIndex = 19;
-            // 
-            // maxNumber
-            // 
-            this.maxNumber.Location = new System.Drawing.Point(673, 483);
-            this.maxNumber.Name = "maxNumber";
-            this.maxNumber.Size = new System.Drawing.Size(73, 36);
-            this.maxNumber.TabIndex = 20;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(20, 408);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(119, 28);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "Host Rules:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(20, 486);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(330, 35);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Reservation Time (Nights):";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(325, 486);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(112, 28);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Minimum:";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(545, 486);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(116, 28);
-            this.label14.TabIndex = 24;
-            this.label14.Text = "Maximum:";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(18, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(282, 28);
-            this.label15.TabIndex = 0;
-            this.label15.Text = "Choose Available Amenities:";
-            // 
-            // checkList
-            // 
-            this.checkList.FormattingEnabled = true;
-            this.checkList.Location = new System.Drawing.Point(24, 68);
-            this.checkList.Name = "checkList";
-            this.checkList.Size = new System.Drawing.Size(538, 424);
-            this.checkList.TabIndex = 1;
+            this.AttractionDistanceTable.AllowUserToResizeRows = false;
+            this.AttractionDistanceTable.BackgroundColor = System.Drawing.Color.White;
+            this.AttractionDistanceTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AttractionDistanceTable.Location = new System.Drawing.Point(15, 68);
+            this.AttractionDistanceTable.Name = "AttractionDistanceTable";
+            this.AttractionDistanceTable.RowHeadersWidth = 51;
+            this.AttractionDistanceTable.RowTemplate.Height = 24;
+            this.AttractionDistanceTable.Size = new System.Drawing.Size(914, 448);
+            this.AttractionDistanceTable.TabIndex = 1;
             // 
             // label16
             // 
@@ -471,16 +440,49 @@
             this.label16.Text = "Specify the distance from each close by attraction and the time it takes to get t" +
     "o them:";
             // 
-            // AttractionDistanceTable
+            // saveBtn
             // 
-            this.AttractionDistanceTable.BackgroundColor = System.Drawing.Color.White;
-            this.AttractionDistanceTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AttractionDistanceTable.Location = new System.Drawing.Point(15, 68);
-            this.AttractionDistanceTable.Name = "AttractionDistanceTable";
-            this.AttractionDistanceTable.RowHeadersWidth = 51;
-            this.AttractionDistanceTable.RowTemplate.Height = 24;
-            this.AttractionDistanceTable.Size = new System.Drawing.Size(914, 448);
-            this.AttractionDistanceTable.TabIndex = 1;
+            this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveBtn.Location = new System.Drawing.Point(762, 641);
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(184, 45);
+            this.saveBtn.TabIndex = 6;
+            this.saveBtn.Text = "Save";
+            this.saveBtn.UseVisualStyleBackColor = true;
+            // 
+            // nextBtn
+            // 
+            this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.nextBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextBtn.Location = new System.Drawing.Point(623, 641);
+            this.nextBtn.Name = "nextBtn";
+            this.nextBtn.Size = new System.Drawing.Size(123, 45);
+            this.nextBtn.TabIndex = 7;
+            this.nextBtn.Text = "Next";
+            this.nextBtn.UseVisualStyleBackColor = true;
+            // 
+            // closeBtn
+            // 
+            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeBtn.Location = new System.Drawing.Point(762, 641);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(184, 45);
+            this.closeBtn.TabIndex = 8;
+            this.closeBtn.Text = "Close";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelBtn.Font = new System.Drawing.Font("Calibri", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelBtn.Location = new System.Drawing.Point(762, 641);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(184, 45);
+            this.cancelBtn.TabIndex = 9;
+            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.UseVisualStyleBackColor = true;
             // 
             // EditListingForm
             // 
@@ -488,21 +490,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(976, 734);
-            this.Controls.Add(this.CancelBtn);
-            this.Controls.Add(this.finishBtn);
             this.Controls.Add(this.nextBtn);
-            this.Controls.Add(this.SaveBtn);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.managementTab);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.closeBtn);
+            this.Controls.Add(this.saveBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditListingForm";
             this.Text = "EditListingForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.managementTab.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.maxNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bathroomsNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedroomsNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bedsNumber)).EndInit();
@@ -511,8 +515,6 @@
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.minNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AttractionDistanceTable)).EndInit();
             this.ResumeLayout(false);
 
@@ -523,14 +525,14 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl managementTab;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button finishBtn;
-        private System.Windows.Forms.Button CancelBtn;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.ComboBox serviceTypeCb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;

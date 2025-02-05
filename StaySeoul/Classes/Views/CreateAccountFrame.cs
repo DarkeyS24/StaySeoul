@@ -175,5 +175,9 @@ namespace StaySeoul.Classes.Views
                 this.Location = Point.Add(formPoint, new Size(dif));
             }
         }
+        private void termLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            terms1.Visible = true;
+        }
     }
 }
