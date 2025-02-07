@@ -24,7 +24,6 @@ namespace StaySeoul.Classes.Models
         {
             return GUID;
         }
-
         public void SetGuid(Guid guid)
         {
             GUID = guid;

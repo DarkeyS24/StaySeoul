@@ -10,7 +10,7 @@ namespace StaySeoul.Classes.Models
     internal class Item
     {
         public BigInteger Id { get; set; }
-        public string GUID { get; set; }
+        public Guid GUID = new Guid();
         public BigInteger UserId { get; set; }
         public BigInteger ItemTypeId { get; set; }
         public BigInteger AreaId { get; set; }
@@ -25,5 +25,14 @@ namespace StaySeoul.Classes.Models
         public string HostRules { get; set; }
         public int MinimumNights { get; set; }
         public int MaximumNights { get; set; }
+
+        public Guid GetGuid()
+        {
+            return GUID;
+        }
+        public void SetGuid(Guid guid)
+        {
+            GUID = guid;
+        }
     }
 }

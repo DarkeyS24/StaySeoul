@@ -33,6 +33,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.managementTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label17 = new System.Windows.Forms.Label();
+            this.areaCb = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -90,6 +92,9 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(977, 41);
             this.panel1.TabIndex = 3;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // label1
             // 
@@ -126,6 +131,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.label17);
+            this.tabPage1.Controls.Add(this.areaCb);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
@@ -158,6 +165,23 @@
             this.tabPage1.Size = new System.Drawing.Size(944, 530);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Listing Details";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(433, 130);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(63, 28);
+            this.label17.TabIndex = 26;
+            this.label17.Text = "Area:";
+            // 
+            // areaCb
+            // 
+            this.areaCb.FormattingEnabled = true;
+            this.areaCb.Location = new System.Drawing.Point(532, 126);
+            this.areaCb.Name = "areaCb";
+            this.areaCb.Size = new System.Drawing.Size(343, 36);
+            this.areaCb.TabIndex = 25;
             // 
             // label14
             // 
@@ -450,6 +474,7 @@
             this.saveBtn.TabIndex = 6;
             this.saveBtn.Text = "Save";
             this.saveBtn.UseVisualStyleBackColor = true;
+            this.saveBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.saveBtn_MouseClick);
             // 
             // nextBtn
             // 
@@ -461,6 +486,7 @@
             this.nextBtn.TabIndex = 7;
             this.nextBtn.Text = "Next";
             this.nextBtn.UseVisualStyleBackColor = true;
+            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             // 
             // closeBtn
             // 
@@ -483,6 +509,7 @@
             this.cancelBtn.TabIndex = 9;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // EditListingForm
             // 
@@ -562,5 +589,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView AttractionDistanceTable;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox areaCb;
     }
 }

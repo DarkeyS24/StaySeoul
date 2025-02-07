@@ -103,6 +103,7 @@ namespace StaySeoul.Classes.Views
         private void addBtn_Click(object sender, EventArgs e)
         {
             EditListingForm add = new EditListingForm(this, employeeId);
+            add.setTabControl(0);
             add.SetAddFields();
             add.Show();
         }
