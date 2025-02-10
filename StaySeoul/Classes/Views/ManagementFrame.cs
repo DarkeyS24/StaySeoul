@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Math.EC;
 using StaySeoul.Classes.Models;
 
@@ -106,6 +107,44 @@ namespace StaySeoul.Classes.Views
             add.setTabControl(0);
             add.SetAddFields();
             add.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row;
+            string title = "";
+            if (employeeTable.SelectedRows.Count <= 0)
+            {
+                MessageBox.Show("Select a row");
+            }
+            else
+            {
+                row = employeeTable.CurrentRow;
+                title = row.Cells[0].Value.ToString();
+                EditListingForm form = new EditListingForm(this, employeeId);
+                form.setTabControl(1);
+                int itemId = GetItemId(title);
+                form.SetEditFields(title, itemId);
+                form.Show();
+            }
+        }
+
+        private int GetItemId(string title)
+        {
+            MySqlConnection con = new Connection().GetConnection();
+            con.Open();
+            string query = "Select id from items where Title = @title";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@title", title);
+            var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                return reader.GetInt32(0);
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

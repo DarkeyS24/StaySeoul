@@ -226,6 +226,11 @@
             // maxNumber
             // 
             this.maxNumber.Location = new System.Drawing.Point(673, 483);
+            this.maxNumber.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.maxNumber.Name = "maxNumber";
             this.maxNumber.Size = new System.Drawing.Size(73, 36);
             this.maxNumber.TabIndex = 20;
@@ -233,6 +238,11 @@
             // minNumber
             // 
             this.minNumber.Location = new System.Drawing.Point(448, 482);
+            this.minNumber.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
             this.minNumber.Name = "minNumber";
             this.minNumber.Size = new System.Drawing.Size(73, 36);
             this.minNumber.TabIndex = 19;
@@ -498,6 +508,7 @@
             this.closeBtn.TabIndex = 8;
             this.closeBtn.Text = "Close";
             this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // cancelBtn
             // 
@@ -521,9 +532,9 @@
             this.Controls.Add(this.managementTab);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.saveBtn);
+            this.Controls.Add(this.cancelBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditListingForm";
             this.Text = "EditListingForm";
