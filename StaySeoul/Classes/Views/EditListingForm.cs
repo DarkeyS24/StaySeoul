@@ -21,9 +21,9 @@ namespace StaySeoul.Classes.Views
         private int employeeId;
 
         private List<ItemAttraction> itemAttractionList = new List<ItemAttraction>();
-        private List<ItemAmenity> itemAmenityListnew = new List<ItemAmenity>();
+        private List<ItemAmenity> itemAmenityList = new List<ItemAmenity>();
         private Item item = new Item();
-        private List<Amenity> amenityListnew = new List<Amenity>();
+        private List<Amenity> amenityList = new List<Amenity>();
 
         public EditListingForm(ManagementFrame form, int employeeId)
         {
@@ -139,9 +139,9 @@ namespace StaySeoul.Classes.Views
         private bool SecondTabFieldsVerification()
         {
             int num = 0;
-            foreach (CheckBox box in checkList.Items)
+            foreach (var box in checkList.Items)
             {
-                if (box.Checked == true)
+                if (checkList.GetItemChecked(checkList.Items.IndexOf(box)))
                 {
                     num++;
                 }
@@ -152,15 +152,16 @@ namespace StaySeoul.Classes.Views
                 return true;
             }
             else{
+                MessageBox.Show("Select at least three options");
                 return false;
             }
         }
         private bool ThirdTabFieldsVerification()
         {
             int num = 0;
-            foreach (DataRow row in AttractionDistanceTable.Rows)
+            foreach (DataGridViewRow row in AttractionDistanceTable.Rows)
             {
-                if (!string.IsNullOrEmpty(row[2].ToString()))
+                if (!row.IsNewRow && !string.IsNullOrEmpty(row.Cells[2].ToString()))
                 {
                     num++;
                 }
@@ -251,8 +252,12 @@ namespace StaySeoul.Classes.Views
             {
                 if (managementTab.SelectedIndex == 0)
                 {
-                    if (FirstTabFieldsVerification())
+                    if (FirstTabFieldsVerification() && isTitleRegisteredVerification())
                     {
+                        do
+                        {
+                            item.SetGuid(Guid.NewGuid());
+                        } while (isGuidRegisteredVerification() == false);
                         item.ItemTypeId = serviceTypeCb.SelectedIndex + 1;
                         item.Title = titleTxt.Text;
                         item.UserId = employeeId;
@@ -267,7 +272,9 @@ namespace StaySeoul.Classes.Views
                         item.HostRules = rulesTxt.Text;
                         item.MinimumNights = (int)(minNumber.Value);
                         item.MaximumNights = (int)(maxNumber.Value);
+                        this.number = 1;
                         managementTab.SelectedIndex = 1;
+                        this.number = 0;
                     }
                 }else if(managementTab.SelectedIndex == 1)
                 {
@@ -279,7 +286,9 @@ namespace StaySeoul.Classes.Views
                         nextBtn.Visible = false;
                         cancelBtn.Visible = false;
                         saveBtn.Visible = true;
+                        this.number = 1;
                         managementTab.SelectedIndex = 2;
+                        this.number = 0;
                     }
                 }
             }
@@ -288,7 +297,7 @@ namespace StaySeoul.Classes.Views
         {
             MySqlConnection con = new Connection().GetConnection();
             con.Open();
-            string query = "Select att.Name, a.Name from attractions att inner join areas a on att.AreaID = a.ID Where att.AreaID = @area";
+            string query = "Select att.Name as Attraction, a.Name as Area from attractions att inner join areas a on att.AreaID = a.ID Where att.AreaID = @area";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@area", item.AreaId);
             var resposta = cmd.ExecuteReader();
@@ -296,9 +305,10 @@ namespace StaySeoul.Classes.Views
             if (resposta.Read())
             {
                 dt.Load(resposta);
+                AttractionDistanceTable.DataSource = dt;
+                AttractionDistanceTable.Columns.Add("Distance", "Distance");
                 AttractionDistanceTable.Columns.Add("Duration On Foot", "Duration On Foot");
                 AttractionDistanceTable.Columns.Add("Duration By Car", "Duration By Car");
-                AttractionDistanceTable.DataSource = dt;
             }
         }
         private void saveBtn_MouseClick(object sender, MouseEventArgs e)
@@ -307,16 +317,23 @@ namespace StaySeoul.Classes.Views
             {
                 ItemAttraction itemAttraction = new ItemAttraction();
                 int num = 1;
-                foreach (DataRow row in AttractionDistanceTable.Rows)
+                foreach (DataGridViewRow row in AttractionDistanceTable.Rows)
                 {
-                    if (!string.IsNullOrEmpty(row[2].ToString()))
+                    if (!row.IsNewRow)
                     {
-                        itemAttraction.AttractionId = num;
-                        itemAttraction.ItemId = item.Id;
-                        itemAttraction.Distance = (double)(row[2]);
-                        itemAttraction.DurationOnFoot = (BigInteger)(row[3]);
-                        itemAttraction.DurationByCar = (BigInteger)(row[4]);
-                        itemAttractionList.Add(itemAttraction);
+                        if (row.Cells[0].Value != null && !string.IsNullOrEmpty(row.Cells[0].Value.ToString()) &&
+                            row.Cells[1].Value != null && !string.IsNullOrEmpty(row.Cells[1].Value.ToString()) &&
+                            row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
+                        {
+                            itemAttraction.AttractionId = num;
+                            itemAttraction.ItemId = item.Id;
+
+                            itemAttraction.Distance = Double.Parse(row.Cells[0].Value.ToString());
+                            itemAttraction.DurationOnFoot = BigInteger.Parse(row.Cells[1].Value.ToString());
+                            itemAttraction.DurationByCar = BigInteger.Parse(row.Cells[2].Value.ToString());
+
+                            itemAttractionList.Add(itemAttraction);
+                        }
                     }
                     num++;
                 }
@@ -355,7 +372,7 @@ namespace StaySeoul.Classes.Views
         {
             MySqlConnection con = new Connection().GetConnection();
             con.Open();
-            string query = "Insert into items values(default, @guid, @userId, @itemTypeId, @areaId, @title, @capacity, @beds, @bedrooms, @bathrooms, @exact, @approximate, @desc, @rules, @min, @ max)";
+            string query = "Insert into items values(default, @guid, @userId, @itemTypeId, @areaId, @title, @capacity, @beds, @bedrooms, @bathrooms, @exact, @approximate, @desc, @rules, @min, @max)";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@guid", item.GetGuid());
             cmd.Parameters.AddWithValue("@userId", item.UserId);
@@ -386,7 +403,7 @@ namespace StaySeoul.Classes.Views
 
             foreach (var itemAttraction in itemAttractionList)
             {
-                query = "Insert into amenities values(default, @guid, @itemId, @attractionId, @distance, @onFoot, @byCar)";
+                query = "Insert into itemattractions values(default, @guid, @itemId, @attractionId, @distance, @onFoot, @byCar)";
                 cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@guid", itemAttraction.GetGuid());
                 cmd.Parameters.AddWithValue("@itemId", itemAttraction.ItemId);
@@ -399,7 +416,7 @@ namespace StaySeoul.Classes.Views
 
             foreach (var itemAmenity in itemAmenityList)
             {
-                query = "Insert into amenities values(default, @guid, @itemId, @amenityId)";
+                query = "Insert into itemamenities values(default, @guid, @itemId, @amenityId)";
                 cmd = new MySqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@guid", itemAmenity.GetGuid());
                 cmd.Parameters.AddWithValue("@itemId", itemAmenity.ItemId);
@@ -412,14 +429,14 @@ namespace StaySeoul.Classes.Views
         }
         private void SetAmenityList()
         {
-            foreach (CheckBox box in checkList.Items)
+            foreach (object box in checkList.Items)
             {
-                if (box.Checked == true)
+                if (checkList.GetItemChecked(checkList.Items.IndexOf(box)))
                 {
                     Amenity amenity = new Amenity();
-                    amenity.Name = box.Text;
+                    amenity.Name = box.ToString();
                     ItemAmenity itemAmenity = new ItemAmenity();
-                    itemAmenity.AmenityId = box.ImageIndex;
+                    itemAmenity.AmenityId = checkList.Items.IndexOf(box);
                     if (GetItemId() == 0)
                     {
                         itemAmenity.ItemId = 1;
@@ -447,6 +464,41 @@ namespace StaySeoul.Classes.Views
             else
             {
                 return -1;
+            }
+        }
+
+        private bool isTitleRegisteredVerification()
+        {
+            MySqlConnection con = new Connection().GetConnection();
+            con.Open();
+            string query = "Select * from items where Title = @title";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@title", item.Title);
+            var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private bool isGuidRegisteredVerification()
+        {
+            MySqlConnection con = new Connection().GetConnection();
+            con.Open();
+            string query = "Select * from items where GUID = @guid";
+            MySqlCommand cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@guid", item.GetGuid());
+            var reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

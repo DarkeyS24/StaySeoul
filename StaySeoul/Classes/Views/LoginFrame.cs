@@ -199,7 +199,7 @@ namespace StaySeoul
         {
             MySqlConnection con = new Connection().GetConnection();
             con.Open();
-            string query = "Select i.Title, i.Capacity, it.Name, a.Name from items i join itemtypes it on i.ItemTypeID = it.ID join areas a on i.AreaID = a.ID";
+            string query = "Select i.Title, i.Capacity, a.Name as Area, it.Name as Type from items i join itemtypes it on i.ItemTypeID = it.ID join areas a on i.AreaID = a.ID";
             MySqlCommand cmd = new MySqlCommand(query, con);
             MySqlDataReader reader = cmd.ExecuteReader();
             DataTable dt = new DataTable();
@@ -212,7 +212,7 @@ namespace StaySeoul
         {
             MySqlConnection con = new Connection().GetConnection();
             con.Open();
-            string query = "Select i.Title, i.Capacity, it.Name, a.Name from items i inner join itemtypes it on i.ItemTypeID = it.ID inner join areas a on i.AreaID = a.ID inner join users u on i.UserID = u.ID and u.ID = @id";
+            string query = "Select i.Title, i.Capacity, a.Name as Area, it.Name as Type from items i inner join itemtypes it on i.ItemTypeID = it.ID inner join areas a on i.AreaID = a.ID inner join users u on i.UserID = u.ID and u.ID = @id";
             MySqlCommand cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@id", id);
             MySqlDataReader reader = cmd.ExecuteReader();
