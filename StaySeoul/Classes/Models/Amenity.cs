@@ -10,7 +10,7 @@ namespace StaySeoul.Classes.Models
     internal class Amenity
     {
         public BigInteger Id { get; set; }
-        public Guid GUID = new Guid();
+        public Guid GUID = Guid.NewGuid();
         public string Name { get; set; }
         public string IconName { get; set; }
 

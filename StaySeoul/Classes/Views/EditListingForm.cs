@@ -272,7 +272,7 @@ namespace StaySeoul.Classes.Views
             reader.Close();
 
             List<ItemAmenity> itemAmenities = new List<ItemAmenity>();
-            query = "Select * from itemamenities where itemID = @item";
+            query = "Select * from itemamenities where ItemID = @item";
             cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("item", itemId);
             reader = cmd.ExecuteReader();
@@ -398,9 +398,7 @@ namespace StaySeoul.Classes.Views
                 {
                     if (!row.IsNewRow)
                     {
-                        if (row.Cells[0].Value != null && !string.IsNullOrEmpty(row.Cells[0].Value.ToString()) &&
-                            row.Cells[1].Value != null && !string.IsNullOrEmpty(row.Cells[1].Value.ToString()) &&
-                            row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
+                        if (row.Cells[0].Value != null && !string.IsNullOrEmpty(row.Cells[0].Value.ToString()))
                         {
                             itemAttraction.AttractionId = num;
                             itemAttraction.ItemId = item.Id;
@@ -414,7 +412,11 @@ namespace StaySeoul.Classes.Views
                     }
                     num++;
                 }
-                SaveOnDataBase();
+                if (isTitleRegisteredVerification())
+                {
+                    SaveOnDataBase();
+                }
+               
             }
         }
 
@@ -492,6 +494,7 @@ namespace StaySeoul.Classes.Views
 
             con.Close();
             MessageBox.Show("data successfully recorded");
+            this.Close();
         }
         private void UpdateOnDataBase()
         {
@@ -531,16 +534,14 @@ namespace StaySeoul.Classes.Views
                 cmd.ExecuteNonQuery();
             }
 
+            query = "Delete from itemamenities where ItemID = @itemId";
+            cmd = new MySqlCommand(query, con);
+            cmd.Parameters.AddWithValue("@itemId", this.itemId);
+            cmd.ExecuteNonQuery();
+
             foreach (var itemAmenity in itemAmenityList)
             {
-                query = "Update itemamenities set GUID = @guid, ItemID = @itemId, AmenityID = @amenityId where ID = @itemAmenityId";
-                cmd = new MySqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@guid", itemAmenity.GetGuid());
-                cmd.Parameters.AddWithValue("@itemId", itemAmenity.ItemId);
-                cmd.Parameters.AddWithValue("@amenityId", itemAmenity.AmenityId);
-                cmd.Parameters.AddWithValue("@itemAmenityId", itemAmenity.Id);
-                var value = cmd.ExecuteNonQuery();
-                if (value == 0)
+                if (itemAmenity.Id == null || itemAmenity.Id <= 0)
                 {
                     query = "Insert into itemamenities values(default, @guid, @itemId, @amenityId)";
                     cmd = new MySqlCommand(query, con);
@@ -689,7 +690,7 @@ namespace StaySeoul.Classes.Views
                 }
             }
 
-            ItemAttraction itemAttraction = new ItemAttraction();
+            ItemAttraction itemAttraction;
             int num = 1;
             itemAttractionList.Clear();
             foreach (DataGridViewRow row in AttractionDistanceTable.Rows)
@@ -698,6 +699,7 @@ namespace StaySeoul.Classes.Views
                 {
                     if (row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
                     {
+                        itemAttraction = new ItemAttraction();
                         itemAttraction.Id = itemAttractionListCopy[num - 1].Id;
                         itemAttraction.AttractionId = num;
                         itemAttraction.ItemId = this.itemId;

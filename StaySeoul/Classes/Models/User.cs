@@ -11,7 +11,7 @@ namespace StaySeoul.Classes.Models
     {
         public BigInteger Id { get; set; }
 
-        public Guid GUID = new Guid();
+        public Guid GUID = Guid.NewGuid();
         public BigInteger UserTypeId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

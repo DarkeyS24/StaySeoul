@@ -10,7 +10,7 @@ namespace StaySeoul.Classes.Models
     internal class ItemAttraction
     {
         public BigInteger Id { get; set; }
-        public Guid GUID = new Guid();
+        public Guid GUID = Guid.NewGuid();
         public BigInteger ItemId { get; set; }
         public BigInteger AttractionId { get; set; }
         public double Distance { get; set; }

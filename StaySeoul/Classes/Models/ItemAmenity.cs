@@ -10,7 +10,7 @@ namespace StaySeoul.Classes.Models
     internal class ItemAmenity
     {
         public BigInteger Id { get; set; }
-        public Guid GUID = new Guid();
+        public Guid GUID = Guid.NewGuid();
         public BigInteger ItemId { get; set; }
         public BigInteger AmenityId { get; set; }
 
