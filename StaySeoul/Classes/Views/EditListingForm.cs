@@ -17,6 +17,7 @@ namespace StaySeoul.Classes.Views
         private int itemId;
 
         private List<ItemAttraction> itemAttractionList = new List<ItemAttraction>();
+        private List<ItemAttraction> itemAttractionListCopy = new List<ItemAttraction>();
         private List<ItemAmenity> itemAmenityList = new List<ItemAmenity>();
         private Item item = new Item();
 
@@ -289,12 +290,13 @@ namespace StaySeoul.Classes.Views
 
             reader.Close();
 
-            query = "Select att.Name as Attraction, a.Name as Area, ia.Distance, ia.DurationOnFoot as \"Duration on foot\", ia.DurationByCar as \"Duration by car\" from itemattractions ia inner join attractions att on ia.AttractionID = att.ID inner join areas a on att.AreaID = a.ID and ia.ItemID = @item";
+            query = "Select att.Name as Attraction, a.Name as Area, ia.Distance, ia.DurationOnFoot as DurationOnFoot, ia.DurationByCar as DurationByCar from itemattractions ia inner join attractions att on ia.AttractionID = att.ID inner join areas a on att.AreaID = a.ID and ia.ItemID = @item";
             cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@item", itemId);
             reader = cmd.ExecuteReader();
             DataTable dt = new DataTable();
-            if (reader.Read())
+            dt.Load(reader);
+            if (dt != null)
             {
                 AttractionDistanceTable.DataSource = dt;
             }
@@ -305,7 +307,7 @@ namespace StaySeoul.Classes.Views
             cmd = new MySqlCommand(query, con);
             cmd.Parameters.AddWithValue("@item", itemId);
             reader = cmd.ExecuteReader();
-            if (reader.Read())
+            while (reader.Read())
             {
                 ItemAttraction item = new ItemAttraction();
                 item.Id = reader.GetInt64(0);
@@ -316,6 +318,7 @@ namespace StaySeoul.Classes.Views
                 item.DurationOnFoot = reader.GetInt64(5);
                 item.DurationByCar = reader.GetInt64(6);
                 itemAttractionList.Add(item);
+                itemAttractionListCopy.Add(item);
             }
 
             con.Close();
@@ -536,11 +539,20 @@ namespace StaySeoul.Classes.Views
                 cmd.Parameters.AddWithValue("@itemId", itemAmenity.ItemId);
                 cmd.Parameters.AddWithValue("@amenityId", itemAmenity.AmenityId);
                 cmd.Parameters.AddWithValue("@itemAmenityId", itemAmenity.Id);
-                cmd.ExecuteNonQuery();
+                var value = cmd.ExecuteNonQuery();
+                if (value == 0)
+                {
+                    query = "Insert into itemamenities values(default, @guid, @itemId, @amenityId)";
+                    cmd = new MySqlCommand(query, con);
+                    cmd.Parameters.AddWithValue("@guid", itemAmenity.GetGuid());
+                    cmd.Parameters.AddWithValue("@itemId", itemAmenity.ItemId);
+                    cmd.Parameters.AddWithValue("@amenityId", itemAmenity.AmenityId);
+                    cmd.ExecuteNonQuery();
+                }
             }
 
             con.Close();
-            MessageBox.Show("data successfully recorded");
+            MessageBox.Show("data successfully updated");
         }
         private void SetAmenityList()
         {
@@ -668,10 +680,10 @@ namespace StaySeoul.Classes.Views
             itemAmenityList.Clear();
             foreach (object box in checkList.Items)
             {
-                if (checkList.GetItemChecked(checkList.Items.IndexOf(box)))
+                if (checkList.GetItemChecked(checkList.Items.IndexOf(box)) == true)
                 {
                     ItemAmenity itemAmenity = new ItemAmenity();
-                    itemAmenity.AmenityId = checkList.Items.IndexOf(box);
+                    itemAmenity.AmenityId = checkList.Items.IndexOf(box) + 1;
                     itemAmenity.ItemId = this.itemId;
                     itemAmenityList.Add(itemAmenity);
                 }
@@ -679,20 +691,20 @@ namespace StaySeoul.Classes.Views
 
             ItemAttraction itemAttraction = new ItemAttraction();
             int num = 1;
+            itemAttractionList.Clear();
             foreach (DataGridViewRow row in AttractionDistanceTable.Rows)
             {
                 if (!row.IsNewRow)
                 {
-                    if (row.Cells[0].Value != null && !string.IsNullOrEmpty(row.Cells[0].Value.ToString()) &&
-                        row.Cells[1].Value != null && !string.IsNullOrEmpty(row.Cells[1].Value.ToString()) &&
-                        row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
+                    if (row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
                     {
+                        itemAttraction.Id = itemAttractionListCopy[num - 1].Id;
                         itemAttraction.AttractionId = num;
-                        itemAttraction.ItemId = item.Id;
+                        itemAttraction.ItemId = this.itemId;
 
-                        itemAttraction.Distance = Double.Parse(row.Cells[0].Value.ToString());
-                        itemAttraction.DurationOnFoot = BigInteger.Parse(row.Cells[1].Value.ToString());
-                        itemAttraction.DurationByCar = BigInteger.Parse(row.Cells[2].Value.ToString());
+                        itemAttraction.Distance = Double.Parse(row.Cells[2].Value.ToString());
+                        itemAttraction.DurationOnFoot = BigInteger.Parse(row.Cells[3].Value.ToString());
+                        itemAttraction.DurationByCar = BigInteger.Parse(row.Cells[4].Value.ToString());
 
                         itemAttractionList.Add(itemAttraction);
                     }
